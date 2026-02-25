@@ -78,22 +78,18 @@ public class ServidorManager : MonoBehaviour
 
         PaqueteDato paquete = colaProcesamiento.Dequeue();
 
-        if (!historialProcesados.ContainsKey(paquete.id))
+        if (!historialProcesados.ContainsKey(paquete.Id))
         {
-            historialProcesados.Add(paquete.id, paquete);
+            historialProcesados.Add(paquete.Id, paquete);
         }
 
-        float tiempoEspera = Time.time - paquete.tiempoLlegada;
+        float tiempoEspera = Time.time - paquete.TiempoLlegada;
 
         tiempoTotalEspera += tiempoEspera;
         totalProcesados++;
+        tiempoPromedio = tiempoTotalEspera / totalProcesados;
 
-        float tiempoEspera = Time.time - paquete.tiempoLlegada;
-
-        // usarla todas las veces que quieras
-        tiempoTotalEspera += tiempoEspera;
-
-        uiManager.MostrarUltimoProcesado(paquete.id, paquete.tamaño, tiempoEspera);
+        uiManager.MostrarUltimoProcesado(paquete.Id, paquete.TamanoCarga, tiempoEspera);
         //uiManager.ActualizarPromedio(promedio);
         uiManager.ActualizarUI();
        Debug.Log("Procesar siguiente paquete");

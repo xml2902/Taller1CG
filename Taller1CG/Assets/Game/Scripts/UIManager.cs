@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
 
     public void VerificarSaturacion()
     {
-        if (servidorManager.colaProcesamiento.Count > 20)
+        if (servidorManager.CantidadEnCola > 20)
         {
             // Estado SATURADO
             if (textoEstadoServidor != null)

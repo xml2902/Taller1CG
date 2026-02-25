@@ -13,7 +13,7 @@ public class PaqueteDato
     public int TamanoCarga => tamanoCarga;
     public float TiempoLlegada => tiempoLlegada;
 
-    public PaqueteDato(int tamano)
+    public PaqueteDato(int tamano, float tiempoLlegada)
     {
         this.id = System.Guid.NewGuid().ToString(); //UUID para identificar cada paquete de forma única
         this.tamanoCarga = tamano;
