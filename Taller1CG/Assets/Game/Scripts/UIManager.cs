@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
             // Estado SATURADO
             if (textoEstadoServidor != null)
                 textoEstadoServidor.text = "ESTADO: SATURADO";
-            textoEstadoServidor.color = Color.red;
+            textoEstadoServidor.color = Color.white;
 
             if (panelEstado != null)
                 panelEstado.GetComponent<UnityEngine.UI.Image>().color = Color.red;
@@ -62,9 +62,6 @@ public class UIManager : MonoBehaviour
             // Estado NORMAL
             if (textoEstadoServidor != null)
                 textoEstadoServidor.text = "ESTADO: NORMAL";
-
-            //if (panelEstado != null)
-               // panelEstado.GetComponent<UnityEngine.UI.Image>().color = Color.green;
         }
     }
 
@@ -78,5 +75,17 @@ public class UIManager : MonoBehaviour
 
         if (textoUltimoTiempoEspera != null)
             textoUltimoTiempoEspera.text = "Tiempo Espera: " + tiempoEspera.ToString("F2") + " s";
+    }
+
+    public void MostrarMensajeUltimoProcesado(string mensaje)
+    {
+        if (textoUltimoID != null)
+            textoUltimoID.text = mensaje;
+
+        if (textoUltimoTamaño != null)
+            textoUltimoTamaño.text = "";
+
+        if (textoUltimoTiempoEspera != null)
+            textoUltimoTiempoEspera.text = "";
     }
 }

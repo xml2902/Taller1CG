@@ -93,5 +93,20 @@ public class ServidorManager : MonoBehaviour
         //uiManager.ActualizarPromedio(promedio);
         uiManager.ActualizarUI();
        Debug.Log("Procesar siguiente paquete");
-    }        
+    }
+    public void Clear()
+    {
+        colaProcesamiento.Clear();
+        historialProcesados.Clear();
+
+        tiempoTotalEspera = 0f;
+        totalProcesados = 0;
+        tiempoPromedio = 0f;
+
+        uiManager.MostrarMensajeUltimoProcesado("Sistema limpiado correctamente");
+
+        uiManager.ActualizarUI();
+        uiManager.VerificarSaturacion();
+
+    }
 }
