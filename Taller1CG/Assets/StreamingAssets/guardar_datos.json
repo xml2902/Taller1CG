@@ -1,0 +1,39 @@
+{
+    "paquetes": [
+        {
+            "id": "15afc99f-ae4c-4f3f-94e6-2c24f7d238a1",
+            "tamanoCarga": 93,
+            "tiempoLlegada": 2.358973979949951
+        },
+        {
+            "id": "8dc822f9-4c86-43c9-bb87-5105fde8bfc7",
+            "tamanoCarga": 42,
+            "tiempoLlegada": 4.638721942901611
+        },
+        {
+            "id": "a26547a1-2ccb-4f55-b62d-89a3439eeba0",
+            "tamanoCarga": 71,
+            "tiempoLlegada": 4.638721942901611
+        },
+        {
+            "id": "14b55e19-cc10-475d-a493-37791a0d8aa9",
+            "tamanoCarga": 22,
+            "tiempoLlegada": 4.638721942901611
+        },
+        {
+            "id": "29429e17-9820-451d-8acd-423424533159",
+            "tamanoCarga": 84,
+            "tiempoLlegada": 8.387349128723145
+        },
+        {
+            "id": "3e5ba366-2cb0-403f-94c4-c9e766643001",
+            "tamanoCarga": 98,
+            "tiempoLlegada": 8.387349128723145
+        },
+        {
+            "id": "a34d6151-76cb-4d81-9f03-581d8e7c3b25",
+            "tamanoCarga": 2,
+            "tiempoLlegada": 8.387349128723145
+        }
+    ]
+}

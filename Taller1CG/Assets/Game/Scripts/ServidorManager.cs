@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ServidorManager : MonoBehaviour
@@ -31,15 +32,11 @@ public class ServidorManager : MonoBehaviour
     {
         while (true)
         {
-            float espera = Random.Range(intervaloMinimo, intervaloMaximo);
-            yield return new WaitForSeconds(espera);
-
-            int cantidadPaquetes = Random.Range(1, 6);
-            for (int i = 0; i < cantidadPaquetes; i++)
+            yield return new WaitForSeconds(Random.Range(intervaloMinimo, intervaloMaximo));
+            int cantidad = Random.Range(1, 6);
+            for (int i = 0; i < cantidad; i++)
             {
-                int tamano = Random.Range(1, 101);
-                PaqueteDato nuevoPaquete = new PaqueteDato(tamano, Time.time);
-                colaProcesamiento.Enqueue(nuevoPaquete);
+                colaProcesamiento.Enqueue(new PaqueteDato(Random.Range(1, 101), Time.time));
             }
             uiManager.ActualizarUI();
             uiManager.VerificarSaturacion();
@@ -56,21 +53,36 @@ public class ServidorManager : MonoBehaviour
         {
             historialProcesados.Add(paquete.Id, paquete);
 
-            float tiempoEspera = Time.time - paquete.TiempoLlegada;
-            tiempoTotalEspera += tiempoEspera;
+            float espera = Time.time - paquete.TiempoLlegada;
+            tiempoTotalEspera += espera;
             totalProcesados++;
             tiempoPromedio = tiempoTotalEspera / totalProcesados;
 
-            uiManager.MostrarUltimoProcesado(paquete.Id, paquete.TamanoCarga, tiempoEspera);
+            uiManager.MostrarUltimoProcesado(paquete.Id, paquete.TamanoCarga, espera);
             uiManager.ActualizarUI();
+
+            GuardarDatosJSON();
         }
     }
 
     public PaqueteDato BuscarPaquete(string id)
     {
-        if (historialProcesados.ContainsKey(id))
-            return historialProcesados[id];
+        if (historialProcesados.ContainsKey(id)) return historialProcesados[id];
         return null;
+    }
+
+    public void GuardarDatosJSON()
+    {
+        HistorialWrapper wrapper = new HistorialWrapper();
+        foreach (var p in historialProcesados.Values) wrapper.paquetes.Add(p);
+
+        string json = JsonUtility.ToJson(wrapper, true);
+        string ruta = Path.Combine(Application.streamingAssetsPath, "guardar_datos.json");
+
+        if (!Directory.Exists(Application.streamingAssetsPath)) Directory.CreateDirectory(Application.streamingAssetsPath);
+
+        File.WriteAllText(ruta, json);
+        Debug.Log("Guardado en StreamingAssets");
     }
 
     public void Clear()
@@ -80,8 +92,10 @@ public class ServidorManager : MonoBehaviour
         tiempoTotalEspera = 0f;
         totalProcesados = 0;
         tiempoPromedio = 0f;
-        uiManager.MostrarMensajeLimpieza("Sistema Reiniciado");
         uiManager.ActualizarUI();
         uiManager.VerificarSaturacion();
     }
 }
+
+[System.Serializable]
+public class HistorialWrapper { public List<PaqueteDato> paquetes = new List<PaqueteDato>(); }

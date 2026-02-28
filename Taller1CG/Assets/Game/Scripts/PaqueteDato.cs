@@ -1,5 +1,5 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 [System.Serializable]
 public class PaqueteDato
@@ -14,7 +14,7 @@ public class PaqueteDato
 
     public PaqueteDato(int tamano, float tiempo)
     {
-        this.id = System.Guid.NewGuid().ToString();
+        this.id = Guid.NewGuid().ToString(); 
         this.tamanoCarga = tamano;
         this.tiempoLlegada = tiempo;
     }

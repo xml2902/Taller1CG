@@ -24,23 +24,16 @@ public class UIManager : MonoBehaviour
 
     public void ActualizarUI()
     {
-        textoPaquetesEnEspera.text = "Paquetes en espera: " + servidorManager.CantidadEnCola;
-        textoTotalProcesados.text = "Total Procesados: " + servidorManager.CantidadProcesados;
+        textoPaquetesEnEspera.text = "En espera: " + servidorManager.CantidadEnCola;
+        textoTotalProcesados.text = "Procesados: " + servidorManager.CantidadProcesados;
         textoTiempoPromedio.text = "Promedio: " + servidorManager.GetTiempoPromedio.ToString("F2") + "s";
     }
 
     public void VerificarSaturacion()
     {
-        if (servidorManager.CantidadEnCola > 20)
-        {
-            textoEstadoServidor.text = "SERVIDOR SATURADO";
-            if (panelEstado != null) panelEstado.color = Color.red;
-        }
-        else
-        {
-            textoEstadoServidor.text = "ESTADO: NORMAL";
-            if (panelEstado != null) panelEstado.color = Color.green;
-        }
+        bool saturado = servidorManager.CantidadEnCola > 20;
+        textoEstadoServidor.text = saturado ? "SERVIDOR SATURADO" : "ESTADO: NORMAL";
+        if (panelEstado != null) panelEstado.color = saturado ? Color.red : Color.green;
     }
 
     public void MostrarUltimoProcesado(string id, int tamano, float espera)
@@ -50,21 +43,9 @@ public class UIManager : MonoBehaviour
         textoUltimoTiempoEspera.text = "Espera: " + espera.ToString("F2") + "s";
     }
 
-    public void MostrarMensajeLimpieza(string mensaje)
-    {
-        textoUltimoID.text = mensaje;
-        textoUltimoTamano.text = "";
-        textoUltimoTiempoEspera.text = "";
-    }
-
     public void Buscar()
     {
-        string idBuscado = inputBuscar.text;
-        PaqueteDato encontrado = servidorManager.BuscarPaquete(idBuscado);
-
-        if (encontrado != null)
-            textoResultado.text = "Encontrado - Carga: " + encontrado.TamanoCarga;
-        else
-            textoResultado.text = "No encontrado en historial";
+        PaqueteDato p = servidorManager.BuscarPaquete(inputBuscar.text);
+        textoResultado.text = (p != null) ? "Carga: " + p.TamanoCarga : "No encontrado";
     }
 }
