@@ -6,86 +6,65 @@ public class UIManager : MonoBehaviour
 {
     public ServidorManager servidorManager;
 
-    [Header("Referencias UI (asignar desde el Inspector)")]
-    public TMP_Text textoPaquetesEnEspera;    // "Paquetes en espera"
-    public TMP_Text textoTotalProcesados;      // "Total Procesados"
-    public TMP_Text textoEstadoServidor;       // "ESTADO: NORMAL/SATURADO"
-    public GameObject panelEstado;              // Panel que cambia de color
+    [Header("Referencias UI")]
+    public TMP_Text textoPaquetesEnEspera;
+    public TMP_Text textoTotalProcesados;
+    public TMP_Text textoEstadoServidor;
+    public Image panelEstado;
     public TMP_Text textoTiempoPromedio;
 
-    [Header("Último Procesado")]
+    [Header("Buscador")]
+    public TMP_InputField inputBuscar;
+    public TMP_Text textoResultado;
+
+    [Header("Detalle Último")]
     public TMP_Text textoUltimoID;
-    public TMP_Text textoUltimoTamaño;
+    public TMP_Text textoUltimoTamano;
     public TMP_Text textoUltimoTiempoEspera;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ActualizarUI()
     {
-        if (textoPaquetesEnEspera != null)
-            textoPaquetesEnEspera.text =
-                "Paquetes en espera: " + servidorManager.CantidadEnCola;
-
-        if (textoTotalProcesados != null)
-            textoTotalProcesados.text =
-                "Total Procesados: " + servidorManager.TotalProcesados;
-
-        if (textoTiempoPromedio != null)
-            textoTiempoPromedio.text =
-                "Tiempo Promedio: " + servidorManager.TiempoPromedio.ToString("F2") + " s";
+        textoPaquetesEnEspera.text = "Paquetes en espera: " + servidorManager.CantidadEnCola;
+        textoTotalProcesados.text = "Total Procesados: " + servidorManager.CantidadProcesados;
+        textoTiempoPromedio.text = "Promedio: " + servidorManager.GetTiempoPromedio.ToString("F2") + "s";
     }
 
     public void VerificarSaturacion()
     {
         if (servidorManager.CantidadEnCola > 20)
         {
-            // Estado SATURADO
-            if (textoEstadoServidor != null)
-                textoEstadoServidor.text = "ESTADO: SATURADO";
-            textoEstadoServidor.color = Color.white;
-
-            if (panelEstado != null)
-                panelEstado.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+            textoEstadoServidor.text = "SERVIDOR SATURADO";
+            if (panelEstado != null) panelEstado.color = Color.red;
         }
         else
         {
-            // Estado NORMAL
-            if (textoEstadoServidor != null)
-                textoEstadoServidor.text = "ESTADO: NORMAL";
+            textoEstadoServidor.text = "ESTADO: NORMAL";
+            if (panelEstado != null) panelEstado.color = Color.green;
         }
     }
 
-    public void MostrarUltimoProcesado(string id, int tamaño, float tiempoEspera)
+    public void MostrarUltimoProcesado(string id, int tamano, float espera)
     {
-        if (textoUltimoID != null)
-            textoUltimoID.text = "ID: " + id;
-
-        if (textoUltimoTamaño != null)
-            textoUltimoTamaño.text = "Tamaño: " + tamaño;
-
-        if (textoUltimoTiempoEspera != null)
-            textoUltimoTiempoEspera.text = "Tiempo Espera: " + tiempoEspera.ToString("F2") + " s";
+        textoUltimoID.text = "ID: " + id;
+        textoUltimoTamano.text = "Tamaño: " + tamano;
+        textoUltimoTiempoEspera.text = "Espera: " + espera.ToString("F2") + "s";
     }
 
-    public void MostrarMensajeUltimoProcesado(string mensaje)
+    public void MostrarMensajeLimpieza(string mensaje)
     {
-        if (textoUltimoID != null)
-            textoUltimoID.text = mensaje;
+        textoUltimoID.text = mensaje;
+        textoUltimoTamano.text = "";
+        textoUltimoTiempoEspera.text = "";
+    }
 
-        if (textoUltimoTamaño != null)
-            textoUltimoTamaño.text = "";
+    public void Buscar()
+    {
+        string idBuscado = inputBuscar.text;
+        PaqueteDato encontrado = servidorManager.BuscarPaquete(idBuscado);
 
-        if (textoUltimoTiempoEspera != null)
-            textoUltimoTiempoEspera.text = "";
+        if (encontrado != null)
+            textoResultado.text = "Encontrado - Carga: " + encontrado.TamanoCarga;
+        else
+            textoResultado.text = "No encontrado en historial";
     }
 }

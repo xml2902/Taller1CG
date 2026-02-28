@@ -1,23 +1,21 @@
-using System;
 using UnityEngine;
+using System;
 
 [System.Serializable]
-
 public class PaqueteDato
 {
-    private string id;
-    private int tamanoCarga;
-    private float tiempoLlegada;
+    [SerializeField] private string id;
+    [SerializeField] private int tamanoCarga;
+    [SerializeField] private float tiempoLlegada;
 
     public string Id => id;
     public int TamanoCarga => tamanoCarga;
     public float TiempoLlegada => tiempoLlegada;
 
-    public PaqueteDato(int tamano, float tiempoLlegada)
+    public PaqueteDato(int tamano, float tiempo)
     {
-        this.id = System.Guid.NewGuid().ToString(); //UUID para identificar cada paquete de forma única
+        this.id = System.Guid.NewGuid().ToString();
         this.tamanoCarga = tamano;
-        this.tiempoLlegada = Time.time;
-                                        
+        this.tiempoLlegada = tiempo;
     }
 }

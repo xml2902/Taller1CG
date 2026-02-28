@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -697.17126, y: 0.5289917}
-  m_SizeDelta: {x: -1394.343, y: -473.292}
+  m_AnchoredPosition: {x: -682.8023, y: 0.5289917}
+  m_SizeDelta: {x: -1365.605, y: -473.292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &192456837
 MonoBehaviour:
@@ -569,8 +569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 714.7399, y: 0.53100586}
-  m_SizeDelta: {x: -1429.5, y: -473.292}
+  m_AnchoredPosition: {x: 700.37085, y: 0.53100586}
+  m_SizeDelta: {x: -1400.762, y: -473.292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &337736585
 MonoBehaviour:
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
-  m_GlobalPointSize: 14
+  m_GlobalPointSize: 40
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -1385,10 +1385,12 @@ MonoBehaviour:
   textoPaquetesEnEspera: {fileID: 733637011}
   textoTotalProcesados: {fileID: 1101792444}
   textoEstadoServidor: {fileID: 1526145794}
-  panelEstado: {fileID: 725628764}
+  panelEstado: {fileID: 725628766}
   textoTiempoPromedio: {fileID: 886345708}
+  inputBuscar: {fileID: 481287605}
+  textoResultado: {fileID: 1487105518}
   textoUltimoID: {fileID: 1932853311}
-  "textoUltimoTama\xF1o": {fileID: 1674987615}
+  textoUltimoTamano: {fileID: 1674987615}
   textoUltimoTiempoEspera: {fileID: 2034319278}
 --- !u!1 &666291297
 GameObject:
@@ -1495,8 +1497,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1629,7 +1631,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 983470191}
   m_HandleRect: {fileID: 983470190}
   m_Direction: 2
-  m_Value: 0.99999964
+  m_Value: 1
   m_Size: 0.69851667
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2280,8 +2282,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2848,7 +2850,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1493333236}
   m_HandleRect: {fileID: 1493333235}
   m_Direction: 2
-  m_Value: 0.99999964
+  m_Value: 1
   m_Size: 0.69851667
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3115,8 +3117,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 17.185547, y: 0.53100586}
-  m_SizeDelta: {x: -1320.532, y: -473.292}
+  m_AnchoredPosition: {x: 17.565, y: 0.53100586}
+  m_SizeDelta: {x: -1291.5, y: -473.292}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1043629971
 MonoBehaviour:
@@ -3679,7 +3681,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1023505248}
   m_HandleRect: {fileID: 1023505247}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4000,8 +4002,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281575424
-  m_fontColor: {r: 0, g: 0.6603774, b: 0.19846019, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5310,7 +5312,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2089412116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 629527309}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Buscar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2089412116
 MonoBehaviour:
   m_ObjectHideFlags: 0
